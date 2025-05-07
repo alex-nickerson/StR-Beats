@@ -8,6 +8,8 @@ nav{
     height: 150px;
     width: 100%;
     box-shadow: 5px;
+    color: white;
+    text-align: center;
 }
 
 .hero{
@@ -20,7 +22,7 @@ nav{
 .beat{
     display: flex;
     flex-direction: row;
-    width: 65%;
+    width: 60vw;
     height: 300px;
     border-radius: 12px;
     margin-top: 50px;
@@ -70,5 +72,37 @@ nav{
 }
 
 .bottom div{
-    width: 20vw;
+    width: 250px;
+}
+
+.bottom button{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(2, 95, 2);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer
+}
+
+.bottom button:hover{
+    background-color: rgb(2, 82, 2);;
+}
+
+.beat-info{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid pink;
+    height: 50px;
+    width: 60vw;
+}
+
+.beat-info div{
+    border: 2px solid blue;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+#tag-three{
+    text-align: right;
 }
