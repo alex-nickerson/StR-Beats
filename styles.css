@@ -8,22 +8,27 @@ body{
 }
 
 nav{
-    background-color: #1c1c1c;
+    background-color: #302f2f;
     height: 100px;
     width: 100%;
-    box-shadow: 5px;
-    color: white;
     text-align: center;
     position: fixed;
+    display: flex;
     top: 0;
+}
+
+nav a{
+    font-size: 36px;
+    color: white;
+    text-decoration: none;
 }
 
 .hero{
     background-color: #1c1c1c;
     height: 100vh;
     width: 100%;
-    border: 1px solid grey;
     margin: 100px auto 0;
+    padding: 10px;
 }
 
 .beat{
@@ -36,6 +41,11 @@ nav{
     background-color: green;
 }
 
+#waveform{
+    width: 75%;
+    height: 100%;
+    border-radius: 12px;
+}
 
 .left{
     flex-direction: column;
@@ -79,7 +89,16 @@ nav{
 }
 
 .bottom div{
-    width: 250px;
+    width: 200px;
+    height: 50px;
+}
+
+#rewind{
+    width: 20%;
+}
+
+#fastforward{
+    width: 20%;
 }
 
 .bottom button{

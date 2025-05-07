@@ -7,8 +7,8 @@
   <link href="styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  
-  <nav></nav>
+
+  <nav><a href="">Home</a></nav>
 
   <div class="hero">
 
@@ -19,10 +19,14 @@
           <h1>Name</h1>
         </div>
         <div class="middle">
-          <h1>Waveform</h1>
+          <div id="waveform"><h1>Waveform</h1></div>
         </div>
         <div class="bottom">
-          <div><button>Play/Pause</button></div>
+          <div>
+            <div id="rewind"><button>back</button></div>
+            <div><button>Play/Pause</button></div>
+            <div id="fastforward"><button>forward</button></div>
+          </div>
           <div><h2>0:00/9:99</h2></div>
           <div><input type="range"></div>
         </div>
@@ -36,29 +40,33 @@
       <div id="tag-three"><h1>Tag3</h1></div>
     </div>
 
-  <div class="beat">
-    <div class="left"></div>
-    <div class="container">
-      <div class="top">
-        <h1>Name</h1>
+    <div class="beat">
+      <div class="left"></div>
+      <div class="container">
+        <div class="top">
+          <h1>Name</h1>
+        </div>
+        <div class="middle">
+          <div id="waveform"><h1>Waveform</h1></div>
+        </div>
+        <div class="bottom">
+          <div>
+            <div id="rewind"><button>back</button></div>
+            <div><button>Play/Pause</button></div>
+            <div id="fastforward"><button>forward</button></div>
+          </div>
+          <div><h2>0:00/9:99</h2></div>
+          <div><input type="range"></div>
+        </div>
       </div>
-      <div class="middle">
-        <h1>Waveform</h1>
-      </div>
-      <div class="bottom">
-        <div><button>Play/Pause</button></div>
-        <div><h2>0:00/9:99</h2></div>
-        <div><input type="range"></div>
+      <div class="right">
+        <button>|<br>v</button>
       </div>
     </div>
-    <div class="right">
-      <button>|<br>v</button>
+    <div class="beat-info">
+      <div><h1>Tag1 Tag2</h1></div>
+      <div id="tag-three"><h1>Tag3</h1></div>
     </div>
-  </div>
-  <div class="beat-info">
-    <div><h1>Tag1 Tag2</h1></div>
-    <div id="tag-three"><h1>Tag3</h1></div>
-  </div>
 
 </div>
 
