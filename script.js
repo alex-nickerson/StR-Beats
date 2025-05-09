@@ -17,6 +17,11 @@ audio.addEventListener("loadedmetadata", () => {
 });
 audio.addEventListener("timeupdate", () => {
     beatDuration.textContent = `${formatTime(audio.currentTime)}/${formatTime(audio.duration)}`;
+    if (audio.currentTime == audio.duration) {
+        audio.pause()
+        playIcon.src = "images/play-button.png";
+        audio.currentTime = 0;
+    }
 })
 
 function PlayPause() {
