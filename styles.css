@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
 body{
     overflow-x: hidden;
 }
@@ -17,10 +22,9 @@ nav{
     top: 0;
 }
 
-nav a{
-    font-size: 36px;
-    color: white;
-    text-decoration: none;
+nav img{
+    height: 100px;
+    width: 200px;
 }
 
 .hero{
@@ -119,16 +123,30 @@ nav a{
     flex-direction: row;
     border: 2px solid pink;
     height: 50px;
+    position: relative;
     width: 60vw;
 }
 
 .beat-info div{
-    border: 2px solid blue;
+    display: block;
+    float: left;
+    margin: auto;
     height: 100%;
     width: 100%;
     color: white;
 }
 
+.tags div{
+    width: 150px;
+}
+
+.beat-info span{
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+}
+
 #tag-three{
-    text-align: right;
+    width: 300px;
 }
