@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+
+audio{
+    display: hidden;
+}
+
 img{
     max-width: 100%;
     max-height: 100%;
@@ -70,9 +75,20 @@ nav img{
     height: 33.3%;
 }
 
+.top h1{
+    font-size: 36px;
+}
+
 .top img{
     width: 40px;
     height: 40px;
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.top img:hover{
+    background-color: #4e4e4e;
 }
 
 #filler{
@@ -82,7 +98,6 @@ nav img{
 .bottom div{
     height: 50px;
     padding: 5px;
-    max-width: 100%;
 }
 
 #rewind{
@@ -104,6 +119,10 @@ nav img{
 
 .bottom button:hover{
     background-color: #4e4e4e;
+}
+
+#audio-icon img{
+    margin-left: 45px;
 }
 
 .beat-info{
