@@ -38,24 +38,19 @@ nav img{
 .beat{
     display: flex;
     flex-direction: row;
-    width: 60vw;
+    width: 1000px;
     height: 300px;
-    border-radius: 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
     margin-top: 50px;
-    background-color: green;
+    background-color: #302f2f;
 }
 
 #waveform{
     width: 75%;
     height: 100%;
     border-radius: 12px;
-}
-
-.left{
-    flex-direction: column;
-    background-color: peru;
-    width: 50px;
-    height: 100%;
+    background-color: #1c1c1c;
 }
 
 .container{
@@ -68,7 +63,6 @@ nav img{
 }
 
 .container div{
-    border: 1px solid red;
     color: white;
     display: flex;
     align-items: center;
@@ -76,55 +70,51 @@ nav img{
     height: 33.3%;
 }
 
-.right{
-    flex-direction: column;
-    background-color: peru;
-    width: 50px;
-    height: 100%;
+.top img{
+    width: 40px;
+    height: 40px;
 }
 
-.right button{
-    width: 100%;
-    height: 50px;
-}
-
-.bottom{
-    gap: 10%;
+#filler{
+    width: 400px;
 }
 
 .bottom div{
-    width: 200px;
     height: 50px;
+    padding: 5px;
+    max-width: 100%;
 }
 
 #rewind{
-    width: 20%;
+    width: 50%;
 }
 
 #fastforward{
-    width: 20%;
+    width: 50%;
 }
 
 .bottom button{
     width: 100%;
     height: 100%;
-    background-color: rgb(2, 95, 2);
+    border: 2px solid rgb(150, 150, 150);
     border-radius: 12px;
-    border: none;
+    background-color: #302f2f;
     cursor: pointer
 }
 
 .bottom button:hover{
-    background-color: rgb(2, 82, 2);;
+    background-color: #4e4e4e;
 }
 
 .beat-info{
     display: flex;
     flex-direction: row;
-    border: 2px solid pink;
     height: 50px;
     position: relative;
-    width: 60vw;
+    width: 1000px;
+    background-color: #302f2f;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 .beat-info div{
