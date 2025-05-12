@@ -9,10 +9,33 @@ function formatDate(date) {
     return new Date(date).toLocaleDateString(undefined, options);
 }
 
-const beats = [
+function renderBeats() {
+  const hero = document.getElementById('hero');
+  hero.innerHTML = ''; //clear beats
+  beats.forEach(beat => addBeat(beat));
+}
+
+const originalBeats = [
     {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
     {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
 ]
+
+function sortBeats(order) {
+  switch (order) {
+    case "date-asc":
+      beats.sort((a,b) => new Date(a.date) - new Date(b.date));
+      break;
+    case "date-desc":
+      beats.sort((a,b) => new Date(b.date) - new Date(a.date));
+    case "bpm-asc":
+      beats.sort((a,b) => a.bpm - b.bpm);
+    case "bpm-desc":
+      beats.sort((a,b) => b.bpm - a.bpm);
+  }
+  renderBeats();
+}
+
+//Issue: Sorting only works once
 
 function addBeat(beat) {
     const hero = document.getElementById("hero");
@@ -97,3 +120,7 @@ function addBeat(beat) {
 }
 
 beats.forEach(beat => addBeat(beat));
+
+document.getElementById('sort-select').addEventListener('change', (e) => {
+  sortBeats(e.target.value);
+})
