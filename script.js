@@ -4,6 +4,11 @@ function formatTime(seconds) {
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
 
+function formatDate(date) {
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
+    return new Date(date).toLocaleDateString(undefined, options);
+}
+
 const beats = [
     {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
     {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
@@ -41,7 +46,7 @@ function addBeat(beat) {
       <div><img src="images/tag-icon.png" alt=""><span>${beat.bpm}bpm</span></div>
       <div><img src="images/tag-icon.png" alt=""><span>${beat.key}</span></div>
       </div>
-      <div class="tag-three"><img src="images/date-icon.png" alt=""><span>${beat.date}</span></div>
+      <div class="tag-three"><img src="images/date-icon.png" alt=""><span>${formatDate(beat.date)}</span></div>
     </div>
     `;
     hero.appendChild(beatDiv);
