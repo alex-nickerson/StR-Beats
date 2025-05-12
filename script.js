@@ -15,7 +15,7 @@ function renderBeats() {
   beats.forEach(beat => addBeat(beat));
 }
 
-const originalBeats = [
+const beats = [
     {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
     {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
 ]
@@ -27,15 +27,16 @@ function sortBeats(order) {
       break;
     case "date-desc":
       beats.sort((a,b) => new Date(b.date) - new Date(a.date));
+      break;
     case "bpm-asc":
       beats.sort((a,b) => a.bpm - b.bpm);
+      break;
     case "bpm-desc":
       beats.sort((a,b) => b.bpm - a.bpm);
+      break;
   }
   renderBeats();
 }
-
-//Issue: Sorting only works once
 
 function addBeat(beat) {
     const hero = document.getElementById("hero");
