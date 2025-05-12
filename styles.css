@@ -183,3 +183,16 @@ nav .sorting{
 .beat-info .tag-three{
     width: 300px;
 }
+
+footer{
+    padding: 5px;
+    display: flex;
+    color: rgb(240, 240, 240);
+    font-size: 20px;
+    background-color: #302f2f;
+    text-align: center;
+}
+
+footer div{
+    width: 33.33%
+}

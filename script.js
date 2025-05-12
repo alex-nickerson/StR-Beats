@@ -1,3 +1,8 @@
+const beats = [
+    {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
+    {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
+]
+
 function formatTime(seconds) { 
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -14,11 +19,6 @@ function renderBeats() {
   hero.innerHTML = ''; //clear beats
   beats.forEach(beat => addBeat(beat));
 }
-
-const beats = [
-    {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
-    {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
-]
 
 function sortBeats(order) {
   switch (order) {
@@ -97,6 +97,17 @@ function addBeat(beat) {
     });
 
     playButton.addEventListener("click", () => {
+        document.querySelectorAll("audio").forEach(otherAudio => {
+        if (otherAudio !== audio) {
+            otherAudio.pause();
+            otherAudio.currentTime = 0;
+            const otherPlayIcon = otherAudio.closest('.beat').querySelector('.play-icon');
+            if (otherPlayIcon) {
+                otherPlayIcon.src = "images/play-button.png";
+            }
+        }
+        });
+
         if (audio.paused) {
         audio.play();
         playIcon.src = "images/pause-button.png";
@@ -126,3 +137,6 @@ beats.forEach(beat => addBeat(beat));
 document.getElementById('sort-select').addEventListener('change', (e) => {
   sortBeats(e.target.value);
 })
+
+function Disclaimer(){
+}
