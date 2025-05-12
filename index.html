@@ -9,7 +9,21 @@
 </head>
 <body>
 
-  <nav><a href=""><img src="images/logobeatweb-removebg-preview.png" alt=""></a></nav>
+  <nav>
+    <div></div>
+    <div><a href=""><img src="images/logobeatweb-removebg-preview.png" alt=""></a></div>
+      <div class="sorting">
+    <label for="sort-select">Sort:</label>
+    <select id="sort-select">
+      <option value="date-desc">Newest First</option>
+      <option value="date-asc">Oldest First</option>
+      <option value="bpm-asc">BPM Ascending</option>
+      <option value="bpm-desc">BPM Descending</option>
+      <option value="key-asc">Key A -> Z</option>
+      <option value="key-desc">Key Z -> A</option>
+    </select>
+  </div>
+  </nav>
 
   <div class="hero" id="hero">
 
