@@ -66,6 +66,7 @@ function addBeat(beat) {
       </div>
     </div>
     <div class="beat-info">
+      <p>BPM: ${beat.bpm}, Key: ${beat.key}, Date: ${beat.date}
       <div class="tags">
       <div><img src="images/tag-icon.png" alt=""><span>${beat.bpm}bpm</span></div>
       <div><img src="images/tag-icon.png" alt=""><span>${beat.key}</span></div>

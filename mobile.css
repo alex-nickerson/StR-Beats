@@ -1,0 +1,79 @@
+@media only screen and (max-width: 1100px) {
+    nav img{
+        height: 80px;
+        width: 150px;
+    }
+
+    .sorting select{
+        width: 100px;
+    }
+
+    .beat{
+        width: 80vw;
+    }
+
+    .beat-info{
+        width: 80vw;
+    }
+
+    .bottom .rewind{
+        display: 10vw;
+    }
+
+    .bottom .fastforward{
+        width: 10vw;
+    }
+
+    .bottom .play-button{
+        width: 10vw;
+    }
+
+    .bottom .volume-slider{
+        display: none;
+    }
+
+    .bottom .audio-icon{
+        display: none;
+    }
+
+    .beat-info span{
+        font-size: 20px;
+        margin-left: 30px;
+    }
+
+    .beat-info img{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translate(0,-50%);
+    }
+
+    .tags div{
+        width: 100px;
+    }
+
+    .middle .waveform img{
+        height: 80%;
+        width: 100%;
+    }
+
+    .middle .waveform{
+        height: 80%;
+    }
+
+    .top img{
+        height: 30px;
+        width: 30px;
+    }
+
+}
+
+@media only screen and (max-width: 460px) {
+    .beat-info div{
+        display: none;
+    }
+    .beat-info p{
+        display: block;
+    }
+}

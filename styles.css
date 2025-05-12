@@ -164,6 +164,11 @@ nav .sorting{
     color: rgb(240, 240, 240);
 }
 
+.beat-info p{
+    color: rgb(240, 240, 240);
+    display: none;
+}
+
 .tags div{
     width: 150px;
 }
