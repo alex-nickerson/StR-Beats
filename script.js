@@ -6,6 +6,12 @@ const fastforwardButton = document.getElementById("fastforward-button");
 const volumeSlider = document.getElementById("volume-slider");
 const beatDuration = document.getElementById("beat-duration");*/
 
+function formatTime(seconds) { 
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+}
+
 const beats = [
     {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
     {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
@@ -17,48 +23,85 @@ function addBeat(beat) {
     beatDiv.classList.add('beat-container')
     beatDiv.innerHTML = `
         <div class="beat">
-      <audio src="${src}"></audio>
+      <audio src="${beat.src}"></audio>
       <div class="container">
         <div class="top">
-          <div></div><div><h1>${title}</h1></div><div><a href="${src}" download="${title}"><img src="images/download-button.png" alt=""></a></div>
+          <div></div><div><h1>${beat.title}</h1></div><div><a href="${beat.src}" download="${beat.title}"><img src="images/download-button.png" alt=""></a></div>
         </div>
         <div class="middle">
-          <div class="waveform"><img src="${waveform}" alt=""></div>
+          <div class="waveform"><img src="${beat.waveform}" alt=""></div>
         </div>
         <div class="bottom">
           <div class="filler"></div>
           <div>
-            <div class="rewind"><button id="rewind-button" onclick="Rewind()"><img src="images/rewind-button.png" alt=""></button></div>
-            <div><button id="play-button" onclick="PlayPause()"><img id="play-icon" src="images/play-button.png" alt=""></button></div>
-            <div class="fastforward"><button id="fastforward-button" onclick="FastForward()"><img src="images/fastforward-button.png" alt=""></button></div>
+            <div class="rewind"><button class="rewind-button"><img src="images/rewind-button.png" alt=""></button></div>
+            <div><button class="play-button"><img class="play-icon" src="images/play-button.png" alt=""></button></div>
+            <div class="fastforward"><button class="fastforward-button"><img src="images/fastforward-button.png" alt=""></button></div>
           </div>
-          <div><h2 id="beat-duration">0:00/9:99</h2></div>
-          <div class="audio-icon"><img src="images/audio-icon.png" alt=""><input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5" oninput="Volume()"></div>
+          <div><h2 class="beat-duration">0:00/9:99</h2></div>
+          <div class="audio-icon"><img src="images/audio-icon.png" alt=""><input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5"></div>
           <div class="filler"></div>
         </div>
       </div>
     </div>
     <div class="beat-info">
       <div class="tags">
-      <div><img src="images/tag-icon.png" alt=""><span>${bpm}bpm</span></div>
-      <div><img src="images/tag-icon.png" alt=""><span>${key}</span></div>
+      <div><img src="images/tag-icon.png" alt=""><span>${beat.bpm}bpm</span></div>
+      <div><img src="images/tag-icon.png" alt=""><span>${beat.key}</span></div>
       </div>
-      <div class="tag-three"><img src="images/date-icon.png" alt=""><span>${date}</span></div>
+      <div class="tag-three"><img src="images/date-icon.png" alt=""><span>${beat.date}</span></div>
     </div>
     `;
     hero.appendChild(beatDiv);
 
+    const audio = beatDiv.querySelector('audio');
+    const playButton = beatDiv.querySelector('.play-button');
+    const playIcon = beatDiv.querySelector('.play-icon');
+    const rewindButton = beatDiv.querySelector('.rewind-button');
+    const fastforwardButton = beatDiv.querySelector('.fastforward-button');
+    const volumeSlider = beatDiv.querySelector('.volume-slider');
+    const beatDuration = beatDiv.querySelector('.beat-duration');
+
+    audio.addEventListener("loadedmetadata", () => {
+    beatDuration.textContent = `0:00/${formatTime(audio.duration)}`;
+    });
+    audio.addEventListener("timeupdate", () => {
+        beatDuration.textContent = `${formatTime(audio.currentTime)}/${formatTime(audio.duration)}`;
+        if (audio.currentTime == audio.duration) {
+            audio.pause()
+            playIcon.src = "images/play-button.png";
+            audio.currentTime = 0;
+        }
+    });
+
+    playButton.addEventListener("click", () => {
+        if (audio.paused) {
+        audio.play();
+        playIcon.src = "images/pause-button.png";
+        }
+        else {
+            audio.pause()
+            playIcon.src = "images/play-button.png";
+        }
+    });
+
+    rewindButton.addEventListener("click", () => {
+        audio.currentTime = Math.max(0, audio.currentTime - 5);
+    });
+
+    fastforwardButton.addEventListener("click", () => {
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+    });
+
+    volumeSlider.addEventListener("input", () => {
+        audio.volume = volumeSlider.value;
+    });
+
 }
 
-beats.forEach(addBeat)
+beats.forEach(beat => addBeat(beat));
 
-function formatTime(seconds) { 
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
-}
-
-audio.addEventListener("loadedmetadata", () => {
+/*audio.addEventListener("loadedmetadata", () => {
   beatDuration.textContent = `0:00/${formatTime(audio.duration)}`;
 });
 audio.addEventListener("timeupdate", () => {
@@ -91,4 +134,4 @@ function FastForward() {
 
 function Volume() {
     audio.volume = volumeSlider.value;
-}
+}*/
