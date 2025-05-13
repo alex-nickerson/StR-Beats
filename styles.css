@@ -1,8 +1,13 @@
-*{
-    margin: auto;
+html, body {
+    height: 100%;
+    margin: 0;
     padding: 0;
 }
 
+section{
+    display: flex;
+    flex-direction: column;
+}
 
 audio{
     display: hidden;
@@ -26,6 +31,7 @@ nav{
     position: fixed;
     display: flex;
     top: 0;
+    z-index: 1;
 }
 
 nav img{
@@ -34,12 +40,13 @@ nav img{
 }
 
 nav div{
-    width: 33.333333%;
+    width: 33.33%;
 }
 
 nav .sorting{
     color: rgb(240, 240, 240);
     font-size: 24px;
+    margin: auto;
 }
 
 .sorting select{
@@ -49,6 +56,7 @@ nav .sorting{
     color: rgb(240, 240, 240);
     padding: 5px;
     font-size: 16px;
+    margin: auto;
 }
 
 .hero{
@@ -56,6 +64,7 @@ nav .sorting{
     width: 100%;
     margin: 100px auto 0;
     padding: 10px;
+    flex: 1;
 }
 
 .beat{
@@ -67,6 +76,8 @@ nav .sorting{
     border-top-right-radius: 12px;
     margin-top: 50px;
     background-color: #302f2f;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .middle .waveform{
@@ -74,8 +85,8 @@ nav .sorting{
     height: 100%;
     border-radius: 12px;
     background-color: #1c1c1c;
+    margin: auto;
 }
-
 
 .container{
     display: flex;
@@ -96,6 +107,11 @@ nav .sorting{
 
 .top h1{
     font-size: 36px;
+    margin: auto;
+}
+
+.top a{
+    margin: auto;
 }
 
 .top img{
@@ -123,8 +139,26 @@ nav .sorting{
     width: 50%;
 }
 
+.bottom .rewind-button{
+    font-size: 50px;
+}
+
+.bottom .rewind-button p{
+    transform: translateY(-15px);
+    margin: auto;
+}
+
 .bottom .fastforward{
     width: 50%;
+}
+
+.bottom .fastforward-button{
+    font-size: 50px;
+}
+
+.bottom .fastforward-button p{
+    transform: translateY(-15px);
+    margin: auto;
 }
 
 .bottom button{
@@ -133,11 +167,15 @@ nav .sorting{
     border: 2px solid rgb(150, 150, 150);
     border-radius: 12px;
     background-color: #302f2f;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .bottom button:hover{
     background-color: #4e4e4e;
+}
+
+.beat-duration{
+    margin: auto;
 }
 
 .audio-icon img{
@@ -146,45 +184,36 @@ nav .sorting{
 
 .beat-info{
     display: flex;
-    flex-direction: row;
     height: 50px;
-    position: relative;
     width: 1000px;
     background-color: #302f2f;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+    margin: auto;
 }
 
 .beat-info div{
-    display: block;
-    float: left;
-    margin: auto;
+    display: flex;
+    align-items: center;
     height: 100%;
-    width: 100%;
     color: rgb(240, 240, 240);
+    width: 50%;
+    font-size: 24px;
 }
 
 .beat-info p{
     color: rgb(240, 240, 240);
     display: none;
-}
-
-.tags div{
-    width: 150px;
-}
-
-.beat-info span{
-    font-size: 24px;
-    position: absolute;
-    top: 50%;
-    transform: translate(0,-50%);
+    margin: auto;
 }
 
 .beat-info .tag-three{
-    width: 300px;
+    justify-content: flex-end;
+    margin-right: 5px;
 }
 
 footer{
+    margin-top: 20px;
     padding: 5px;
     display: flex;
     color: rgb(240, 240, 240);

@@ -1,6 +1,8 @@
 const beats = [
-    {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-17"},
-    {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/wrath-waveform.png", bpm: "140", key: "Cm", date: "2025-01-15"}
+    {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/waveforms/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-03"},
+    {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/waveforms/wrath-waveform.png", bpm: "140", key: "Cm", date: "2024-12-15"},
+    {title: "Red Light", src: "audio/Red Light [146bpm] [NA].mp3", waveform: "images/waveforms/redlight-waveform.png", bpm: "146", key: "N/A", date: "2024-03-12"},
+    {title: "Travis", src: "audio/Travis [146bpm] [Dm].mp3", waveform: "images/waveforms/travis-waveform.png", bpm: "146", key: "Dm", date: "2024-03-01"}
 ]
 
 function formatTime(seconds) { 
@@ -55,9 +57,9 @@ function addBeat(beat) {
         <div class="bottom">
           <div class="filler"></div>
           <div>
-            <div class="rewind"><button class="rewind-button"><img src="images/rewind-button.png" alt=""></button></div>
+            <div class="rewind"><button class="rewind-button"><p>⏪︎</p></button></div>
             <div><button class="play-button"><img class="play-icon" src="images/play-button.png" alt=""></button></div>
-            <div class="fastforward"><button class="fastforward-button"><img src="images/fastforward-button.png" alt=""></button></div>
+            <div class="fastforward"><button class="fastforward-button"><p>⏩︎</p></button></div>
           </div>
           <div><h2 class="beat-duration">0:00/9:99</h2></div>
           <div class="audio-icon"><img src="images/audio-icon.png" alt=""><input type="range" class="volume-slider" min="0" max="1" step="0.01" value="0.5"></div>
@@ -66,12 +68,9 @@ function addBeat(beat) {
       </div>
     </div>
     <div class="beat-info">
-      <p>BPM: ${beat.bpm}, Key: ${beat.key}, Date: ${beat.date}
-      <div class="tags">
-      <div><img src="images/tag-icon.png" alt=""><span>${beat.bpm}bpm</span></div>
-      <div><img src="images/tag-icon.png" alt=""><span>${beat.key}</span></div>
-      </div>
-      <div class="tag-three"><img src="images/date-icon.png" alt=""><span>${formatDate(beat.date)}</span></div>
+      <p>BPM: ${beat.bpm}, Key: ${beat.key}, Date: ${beat.date}</p>
+      <div><img src="images/tag-icon.png" alt="">${beat.bpm}bpm&nbsp;<img src="images/tag-icon.png" alt="">${beat.key}</div>
+      <div class="tag-three"><img src="images/date-icon.png" alt="">${formatDate(beat.date)}</div>
     </div>
     `;
     hero.appendChild(beatDiv);
@@ -133,10 +132,8 @@ function addBeat(beat) {
 }
 
 beats.forEach(beat => addBeat(beat));
+sortBeats("desc");
 
 document.getElementById('sort-select').addEventListener('change', (e) => {
   sortBeats(e.target.value);
 })
-
-function Disclaimer(){
-}
