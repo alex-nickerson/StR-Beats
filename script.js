@@ -108,6 +108,7 @@ function addBeat(beat) {
         });
 
         if (audio.paused) {
+        audio.volume = volumeSlider.value;
         audio.play();
         playIcon.src = "images/pause-button.png";
         }
