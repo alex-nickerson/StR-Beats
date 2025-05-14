@@ -11,10 +11,10 @@ function App() {
     <div className="logo"><a href=""><img src="images/logo.png" alt=""></img></a></div>
     <div className="admin">
       <div>
-      <a href="login.html"><img src="images/tag-icon.png" alt=""></img></a>
+      <a href="../login.html"><img src="images/tag-icon.png" alt=""></img></a>
       </div>
       <div>
-      <a href="addbeat.html"><img src="images/download-button.png" alt=""></img></a>
+      <a href="../addbeat.html"><img src="images/download-button.png" alt=""></img></a>
       </div>
     </div>
   </nav>
