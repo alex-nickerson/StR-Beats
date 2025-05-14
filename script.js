@@ -1,3 +1,13 @@
+import {createClient} from "@supabase/supabase-js";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export const supabase = createClient(
+  process.env.PROJECT_URL,
+  process.env.SUPABASE_API_KEY
+);
+
 const beats = [
     {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/waveforms/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-03"},
     {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/waveforms/wrath-waveform.png", bpm: "140", key: "Cm", date: "2024-12-15"},
