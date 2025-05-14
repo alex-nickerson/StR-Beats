@@ -3,6 +3,10 @@
         height: 80px;
     }
     
+    nav .admin img{
+        display: none;
+    }
+
     .sorting select{
         width: 100px;
     }

@@ -1,4 +1,4 @@
-import {createClient} from "@supabase/supabase-js";
+/*import {createClient} from "@supabase/supabase-js";
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -6,14 +6,14 @@ dotenv.config();
 export const supabase = createClient(
   process.env.PROJECT_URL,
   process.env.SUPABASE_API_KEY
-);
+);*/
 
 const beats = [
     {title: "Blessed", src: "audio/Blessed [130bpm] [G].mp3", waveform: "images/waveforms/blessed-waveform.png", bpm: "130", key: "G", date: "2025-01-03"},
     {title: "Wrath", src: "audio/Wrath [140bpm] [Cm].mp3", waveform: "images/waveforms/wrath-waveform.png", bpm: "140", key: "Cm", date: "2024-12-15"},
     {title: "Red Light", src: "audio/Red Light [146bpm] [NA].mp3", waveform: "images/waveforms/redlight-waveform.png", bpm: "146", key: "N/A", date: "2024-03-12"},
     {title: "Travis", src: "audio/Travis [146bpm] [Dm].mp3", waveform: "images/waveforms/travis-waveform.png", bpm: "146", key: "Dm", date: "2024-03-01"}
-]
+];
 
 function formatTime(seconds) { 
     const mins = Math.floor(seconds / 60);
@@ -78,7 +78,7 @@ function addBeat(beat) {
       </div>
     </div>
     <div class="beat-info">
-      <p>BPM: ${beat.bpm}, Key: ${beat.key}, Date: ${beat.date}</p>
+      <p>BPM: ${beat.bpm}, Key: ${beat.key}, Date: ${formatDate(beat.date)}</p>
       <div><img src="images/tag-icon.png" alt="">${beat.bpm}bpm&nbsp;<img src="images/tag-icon.png" alt="">${beat.key}</div>
       <div class="tag-three"><img src="images/date-icon.png" alt="">${formatDate(beat.date)}</div>
     </div>
