@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import BeatList from './BeatTech'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from 'Login';
+import AddBeat from 'AddBeat';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+  <Router>
   <nav>
     <div></div>
     <div className="logo"><a href=""><img src="images/logo.png" alt=""></img></a></div>
@@ -18,6 +22,7 @@ function App() {
       </div>
     </div>
   </nav>
+  </Router>
 
   <section>
   <div className="hero" id="hero">
