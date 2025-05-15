@@ -4,9 +4,10 @@ import {supabase} from './supabaseClient'
 
 function AddBeat() {
     
-    const [newBeat, setNewBeat] = useState({name: "", audio: "", waveform: "", bpm: "", key: "", date: ""})
+    const [newBeat, setNewBeat] = useState({name: "", audio: "", waveform: "", bpm: "", key: "", date: ""});
+    const [audioFile, setAudioFile] = useState(null);
 
-    const handleChange = (e) => {
+    const handleChange = (e) => { 
         const { name, value, type } = e.target;
 
         let parsedValue = value;
@@ -19,12 +20,42 @@ function AddBeat() {
 
         setNewBeat(prev => ({ ...prev, [name]: parsedValue }));
     }
+
+    const handleAudioChange = (e) => {
+        if (e.target.files && e.target.files.length>0) {
+            const file = e.target.files[0];
+            setAudioFile(file);
+        }
+    };
+
+    const uploadAudioFile = async (file) => {
+        const filePath = `${file.name}`
+
+        const {data, error} = await supabase.storage.from('audio').upload(filePath, file);
+        if (error) {
+            console.log("Error uploading audio:", error.message);
+            return;
+        }
+
+        return data.publicUrl;
+    }
         
     const handleSubmit = async (e) => {
-        console.log("test")
         e.preventDefault();
+
+        let audioUrl = null;
+
+        console.log("before")
+        if (audioFile) {
+        audioUrl = await uploadAudioFile(audioFile);
+        }
+
+        const beatToInsert = {
+        ...newBeat,
+        audioUrl
+        };
     
-        const {error} = await supabase.from("Beats").insert(newBeat).single();
+        const {error} = await supabase.from("Beats").insert(beatToInsert).single();
     
         if (error) {
             console.error("Error adding beat: ", error.message);
@@ -35,6 +66,7 @@ function AddBeat() {
         }
     
         setNewBeat({name: "", audio: "", waveform: "", bpm: "", key: "", date: ""})
+        setAudioFile(null);
     }
 
   return (
@@ -52,9 +84,7 @@ function AddBeat() {
                     <label htmlFor="name">Name:</label>
                     <input type="text" id="name" name="name" placeholder="Blessed" value={newBeat.name} onChange={handleChange}/>
                     <label htmlFor="audio">Audio:</label>
-                    <input type="text" id="audio" name="audio" value={newBeat.audio} onChange={handleChange}/>
-                    <label htmlFor="waveform">Waveform:</label>
-                    <input type="text" id="waveform" name="waveform" value={newBeat.waveform} onChange={handleChange}/>
+                    <input type="file" id="audio" name="audio" onChange={handleAudioChange}/>
                     <label htmlFor="bpm">BPM:</label>
                     <input type="number" id="bpm" name="bpm" placeholder="144" value={newBeat.bpm} onChange={handleChange}/>
                     <label htmlFor="key">Key:</label>

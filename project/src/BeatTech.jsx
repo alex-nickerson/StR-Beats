@@ -14,12 +14,29 @@ const formatDate = (date) => {
 };
 
 const BeatList = () => {
-  const [beats, setBeats] = useState([
+
+  const [beats, setBeats] = useState([])
+
+  const fetchBeats = async () => {
+    const {error, data} = await supabase.from("Beats").select("*");
+    if (error) {
+              console.error("Error fetching beat: ", error.message);
+              return;
+          }
+    setBeats(data)
+  }
+
+  useEffect(() => {
+    fetchBeats()
+  }, [])
+
+  /*const [beats, setBeats] = useState([
     { title: 'Blessed', src: 'audio/Blessed [130bpm] [G].mp3', waveform: 'images/waveforms/blessed-waveform.png', bpm: '130', key: 'G', date: '2025-01-03' },
     { title: 'Wrath', src: 'audio/Wrath [140bpm] [Cm].mp3', waveform: 'images/waveforms/wrath-waveform.png', bpm: '140', key: 'Cm', date: '2024-12-15' },
     { title: 'Red Light', src: 'audio/Red Light [146bpm] [NA].mp3', waveform: 'images/waveforms/redlight-waveform.png', bpm: '146', key: 'N/A', date: '2024-03-12' },
     { title: 'Travis', src: 'audio/Travis [146bpm] [Dm].mp3', waveform: 'images/waveforms/travis-waveform.png', bpm: '146', key: 'Dm', date: '2024-03-01' },
-  ]);
+  ]);*/
+
   const [sortOrder, setSortOrder] = useState('date-desc');
 
   useEffect(() => {
@@ -159,7 +176,7 @@ const handlePlayPause = async () => {
         <div className="container">
           <div className="top">
             <div></div>
-            <div><h1>{beat.title}</h1></div>
+            <div><h1>{beat.name}</h1></div>
             <div>
               <a href={beat.src} download={beat.title}>
                 <img src="images/download-button.png" alt="Download" />
