@@ -23,6 +23,7 @@ const BeatList = () => {
               console.error("Error fetching beat: ", error.message);
               return;
           }
+      console.log("Fetched beats:", data);
     setBeats(data)
   }
 
@@ -168,17 +169,16 @@ const handlePlayPause = async () => {
   const handleVolumeChange = (event) => {
     setVolume(event.target.value);
   };
-
   return (
     <div className="beat-container">
       <div className="beat">
-        <audio ref={audioRef} src={beat.src}></audio>
+        <audio ref={audioRef} src={beat.audio}></audio>
         <div className="container">
           <div className="top">
             <div></div>
             <div><h1>{beat.name}</h1></div>
             <div>
-              <a href={beat.src} download={beat.title}>
+              <a href={beat.audio} download={`${beat.name}`}>
                 <img src="images/download-button.png" alt="Download" />
               </a>
             </div>

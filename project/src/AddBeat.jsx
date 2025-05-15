@@ -31,12 +31,13 @@ function AddBeat() {
     const uploadAudioFile = async (file) => {
         const filePath = `${file.name}`
 
-        const {data, error} = await supabase.storage.from('audio').upload(filePath, file);
+        const {error} = await supabase.storage.from('audio').upload(filePath, file);
         if (error) {
             console.log("Error uploading audio:", error.message);
             return;
         }
 
+        const {data}  = await supabase.storage.from('audio').getPublicUrl(filePath);
         return data.publicUrl;
     }
         
@@ -45,14 +46,13 @@ function AddBeat() {
 
         let audioUrl = null;
 
-        console.log("before")
         if (audioFile) {
         audioUrl = await uploadAudioFile(audioFile);
         }
 
         const beatToInsert = {
         ...newBeat,
-        audioUrl
+        audio: audioUrl
         };
     
         const {error} = await supabase.from("Beats").insert(beatToInsert).single();
