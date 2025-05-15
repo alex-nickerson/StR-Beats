@@ -1,17 +1,9 @@
-import {createClient} from "@supabase/supabase-js";
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-export const supabase = createClient(
-  process.env.PROJECT_URL,
-  process.env.SUPABASE_API_KEY
-);
+import {supabase} from './supabaseClient'
+import React, { useEffect, useState } from 'react'
 
 const [newBeat, setNewBeat] = useState({name: "", audio: "", waveform: "", bpm: "", key: "", date:""})
-    console.log("test")
     
-const handleSubmit = async (e) => {
+export const handleSubmit = async (e) => {
     console.log("test")
     e.preventDefault();
 
@@ -24,6 +16,7 @@ const handleSubmit = async (e) => {
     setNewBeat({name: "", audio: "", waveform: "", bpm: "", key: "", date:""})
 }
 
-function Change(e) {
-    setNewBeat((prev) => ({...prev, name: e.target.value}))
+export function handleChange (e) {
+    setNewBeat((prev) => ({...prev, name: e.target.value}));
+    console.log("work");
 }

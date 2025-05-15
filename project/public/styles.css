@@ -11,6 +11,7 @@ html, body {
     justify-content: center;
     background-color: #302f2f;
     border-radius: 8px;
+    margin-top: 25vh;
 }
 
 .container .addbeat{

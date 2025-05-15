@@ -1,12 +1,14 @@
+import {Link} from 'react-router-dom';
+
 function Login() {
   return (
     <div>
       <nav>
         <div></div>
         <div>
-          <a href="index.html">
+          <Link to="/">
             <img src="images/logo.png" alt="StR Beats Logo" />
-          </a>
+          </Link>
         </div>
         <div></div>
       </nav>
