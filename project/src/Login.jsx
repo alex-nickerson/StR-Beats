@@ -3,6 +3,25 @@ import React, { useEffect, useState } from 'react'
 import {supabase} from './supabaseClient'
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+      });
+      if (signInError) {
+        console.error("Error signing up:", signInError.message);
+        return;
+      }
+      else {
+        window.alert("Sign in successful!")
+      }
+    }
+
   return (
     <div>
       <nav>
@@ -18,21 +37,25 @@ function Login() {
       <div className="container">
         <h1>Login</h1>
         <div className="login">
-          <form action="">
-            <label htmlFor="username">Username:</label>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Email:</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              placeholder="StR"
+              id="email"
+              name="email"
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <label htmlFor="password">Password:</label>
             <input
-              type="text"
+              type="password"
               id="password"
               name="password"
-              placeholder="abc123"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <br />

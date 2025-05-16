@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BeatList from './BeatTech'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './Login';
 import AddBeat from './AddBeat';
+import { supabase } from './supabaseClient'
+
 
 function Home() {
   return (
@@ -22,7 +24,28 @@ function Home() {
 }
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [session, setSession] = useState(null);
+
+  const fetchSession = async () => {
+    const currentSession = await supabase.auth.getSession();
+    console.log(currentSession);
+    setSession(currentSession.data.session);
+  };
+
+  useEffect(() => {
+    fetchSession();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
   <Router>
   <nav>
@@ -31,9 +54,11 @@ function App() {
       <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><img src="images/logo.png" alt="Logo" /></Link>
     </div>
     <div className="admin">
+      {session ? (
       <div>
       <Link to="/addbeat"><img src="images/plus-icon.png" alt="Add Beat" /></Link>
       </div>
+      ) : null}
       <div>
       <Link to="/login"><img src="images/profile-icon.png" alt="Login" /></Link>
       </div>
