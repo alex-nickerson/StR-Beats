@@ -32,10 +32,10 @@ function App() {
     </div>
     <div className="admin">
       <div>
-      <Link to="/login"><img src="images/tag-icon.png" alt="Login" /></Link>
+      <Link to="/addbeat"><img src="images/plus-icon.png" alt="Add Beat" /></Link>
       </div>
       <div>
-      <Link to="/addbeat"><img src="images/download-button.png" alt="Add Beat" /></Link>
+      <Link to="/login"><img src="images/profile-icon.png" alt="Login" /></Link>
       </div>
     </div>
   </nav>
