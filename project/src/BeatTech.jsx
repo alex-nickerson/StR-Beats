@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {supabase} from './supabaseClient'
+import Waveform from './Waveform'
 
 // Utility functions
 const formatTime = (seconds) => {
@@ -185,7 +186,7 @@ const handlePlayPause = async () => {
           </div>
           <div className="middle">
             <div className="waveform">
-              <img src={beat.waveform} alt="Waveform" />
+             <Waveform audioUrl={beat.audio} audioRef={audioRef} />
             </div>
           </div>
           <div className="bottom">
