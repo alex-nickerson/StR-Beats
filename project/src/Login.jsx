@@ -15,6 +15,7 @@ function Login() {
       });
       if (signInError) {
         console.error("Error signing up:", signInError.message);
+        window.alert("Email or password incorrect.");
         return;
       }
       else {

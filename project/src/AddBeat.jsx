@@ -2,11 +2,13 @@ import {Link} from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import {supabase} from './supabaseClient'
 
+// Adds a new beat to the database and to the website
 function AddBeat() {
     
-    const [newBeat, setNewBeat] = useState({name: "", audio: "", waveform: "", bpm: "", key: "", date: ""});
+    const [newBeat, setNewBeat] = useState({name: "", audio: "", bpm: "", key: "", date: ""});
     const [audioFile, setAudioFile] = useState(null);
 
+    // Handle changing of text
     const handleChange = (e) => { 
         const { name, value, type } = e.target;
 
@@ -21,9 +23,27 @@ function AddBeat() {
         setNewBeat(prev => ({ ...prev, [name]: parsedValue }));
     }
 
+    // Handle changing of audio
     const handleAudioChange = (e) => {
         if (e.target.files && e.target.files.length>0) {
             const file = e.target.files[0];
+
+            // Only audio files allowed
+            if (file.type !== 'audio/mpeg') {
+                window.alert("Only audio files are allowed.");
+                e.target.value = "";
+                setAudioFile(null);
+                return;        
+            }
+                
+            const maxFileSize = 50 * 1024; // 50KB in bytes
+            if (file.size > maxFileSize) {
+                window.alert("File size must be less than or equal to 25KB.");
+                e.target.value = "";
+                setAudioFile(null);
+                return;
+            }
+
             setAudioFile(file);
         }
     };
@@ -31,7 +51,7 @@ function AddBeat() {
     const uploadAudioFile = async (file) => {
         const filePath = `${file.name}`
 
-        const {error} = await supabase.storage.from('audio').upload(filePath, file);
+        const {error} = await supabase.storage.from('audio').upload(filePath, file, {upsert: true});
         if (error) {
             console.log("Error uploading audio:", error.message);
             return;
@@ -41,6 +61,7 @@ function AddBeat() {
         return data.publicUrl;
     }
         
+    // Handle submitting new beat
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -54,7 +75,8 @@ function AddBeat() {
         ...newBeat,
         audio: audioUrl
         };
-    
+
+        //Insert beat to database
         const {error} = await supabase.from("Beats").insert(beatToInsert).single();
     
         if (error) {
@@ -65,9 +87,13 @@ function AddBeat() {
             window.alert("Beat added successfully!");
         }
     
-        setNewBeat({name: "", audio: "", waveform: "", bpm: "", key: "", date: ""})
+        // Reset form after beat was added
+        setNewBeat({name: "", audio: "", bpm: "", key: "", date: ""})
         setAudioFile(null);
     }
+
+    // Get today's date for max in date created
+    const today = new Date().toISOString().split('T')[0];
 
   return (
     <div>
@@ -82,15 +108,15 @@ function AddBeat() {
             <div className="addbeat">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Blessed" value={newBeat.name} onChange={handleChange}/>
+                    <input type="text" id="name" name="name" placeholder="Name < length 30" maxLength={30} value={newBeat.name} onChange={handleChange}/>
                     <label htmlFor="audio">Audio:</label>
                     <input type="file" id="audio" name="audio" onChange={handleAudioChange}/>
                     <label htmlFor="bpm">BPM:</label>
                     <input type="number" id="bpm" name="bpm" placeholder="144" value={newBeat.bpm} onChange={handleChange}/>
                     <label htmlFor="key">Key:</label>
-                    <input type="text" id="key" name="key" placeholder="Cm" value={newBeat.key} onChange={handleChange}/>
+                    <input type="text" id="key" name="key" placeholder="N/A if unknown" maxLength={3} value={newBeat.key} onChange={handleChange}/>
                     <label htmlFor="date">Date Created:</label>
-                    <input type="date" id="date" name="date" value={newBeat.date} onChange={handleChange}/>
+                    <input type="date" id="date" name="date" min="2000-01-01" max={today} value={newBeat.date} onChange={handleChange}/>
                     <br /><input type="submit" value="submit" className="submit"/>
                 </form> 
             </div>

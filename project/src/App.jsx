@@ -5,7 +5,7 @@ import Login from './Login';
 import AddBeat from './AddBeat';
 import { supabase } from './supabaseClient'
 
-
+// Home page
 function Home() {
   return (
     <>
@@ -26,6 +26,7 @@ function Home() {
 function App() {
   const [session, setSession] = useState(null);
 
+  // Get session to determine if user is authenticated (can add beats)
   const fetchSession = async () => {
     const currentSession = await supabase.auth.getSession();
     console.log(currentSession);
@@ -56,7 +57,7 @@ function App() {
     <div className="admin">
       {session ? (
       <div>
-      <Link to="/addbeat"><img src="images/plus-icon.png" alt="Add Beat" /></Link>
+      <Link to="/addbeat"><img src="images/plus-icon.png" alt="Add Beat" className="addbeat" /></Link>
       </div>
       ) : null}
       <div>

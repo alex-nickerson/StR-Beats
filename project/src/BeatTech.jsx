@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import {supabase} from './supabaseClient'
 import Waveform from './Waveform'
 
-// Utility functions
+// Format the time of the beat
 const formatTime = (seconds) => {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 };
 
+// Format the date of the beat
 const formatDate = (date) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(date).toLocaleDateString(undefined, options);
@@ -32,13 +33,7 @@ const BeatList = () => {
     fetchBeats()
   }, [])
 
-  /*const [beats, setBeats] = useState([
-    { title: 'Blessed', src: 'audio/Blessed [130bpm] [G].mp3', waveform: 'images/waveforms/blessed-waveform.png', bpm: '130', key: 'G', date: '2025-01-03' },
-    { title: 'Wrath', src: 'audio/Wrath [140bpm] [Cm].mp3', waveform: 'images/waveforms/wrath-waveform.png', bpm: '140', key: 'Cm', date: '2024-12-15' },
-    { title: 'Red Light', src: 'audio/Red Light [146bpm] [NA].mp3', waveform: 'images/waveforms/redlight-waveform.png', bpm: '146', key: 'N/A', date: '2024-03-12' },
-    { title: 'Travis', src: 'audio/Travis [146bpm] [Dm].mp3', waveform: 'images/waveforms/travis-waveform.png', bpm: '146', key: 'Dm', date: '2024-03-01' },
-  ]);*/
-
+  // Default sort by date descending
   const [sortOrder, setSortOrder] = useState('date-desc');
 
   useEffect(() => {
@@ -89,6 +84,7 @@ const BeatList = () => {
   );
 };
 
+// The main function for each beat
 const BeatCard = ({ beat }) => {
   const audioRef = useRef(null);
   const playIconRef = useRef(null);
@@ -105,6 +101,7 @@ useEffect(() => {
     setDuration(audio.duration || 0);
   };
 
+  // If the beat finishes playing, set its time to 0 and stop it
   const handleEnded = () => {
     setPlaying(false);
     setCurrentTime(0);
@@ -131,10 +128,11 @@ useEffect(() => {
 }, [volume]);
 
 
+// Handles the function of playing and pausing a beat
 const handlePlayPause = async () => {
   const currentAudio = audioRef.current;
 
-  // Pause all other audio elements
+  // Stop all other audio elements if an audio is playing
   document.querySelectorAll("audio").forEach((otherAudio) => {
     if (otherAudio !== currentAudio) {
       otherAudio.pause();
