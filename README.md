@@ -24,6 +24,7 @@ Through this project I learned more about building react applications (this time
 
 ## Future Updates
 
+- Allow more characters in the name of a beat by making the UI more responsive to scaling
 - Allow users to signup so anyone can upload music
 - Allow users to sign out
 - Add "profiles" for users that will display their provided information and the music they have uploaded
@@ -34,5 +35,5 @@ Through this project I learned more about building react applications (this time
 
 ## Acknowledgements
 
-Special thank you [PedroTech](https://www.youtube.com/@PedroTechnologies) on youtube for the Supabase crash course I followed to implement most of my backend integration.
+Special thank you to [PedroTech](https://www.youtube.com/@PedroTechnologies) on youtube for the Supabase crash course I followed to implement most of my backend integration.
  - [Supabase Crash Course](https://www.youtube.com/watch?v=kyphLGnSz6Q)

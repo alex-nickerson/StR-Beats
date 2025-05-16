@@ -64,6 +64,7 @@ function Login() {
             <input type="submit" value="submit" className="submit" />
           </form>
         </div>
+        Signup coming soon!
       </div>
     </div>
   );

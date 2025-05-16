@@ -11,8 +11,10 @@ const formatTime = (seconds) => {
 
 // Format the date of the beat
 const formatDate = (date) => {
+  const utcDate = new Date(date);
+  const localDate = new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000);
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(date).toLocaleDateString(undefined, options);
+  return localDate.toLocaleDateString(undefined, options);
 };
 
 const BeatList = () => {
@@ -176,7 +178,7 @@ const handlePlayPause = async () => {
           <div className="top">
             <div></div>
             <div><h1>{beat.name}</h1></div>
-            <div>
+            <div className="download-div">
               <a href={beat.audio} download={`${beat.name}`}>
                 <img src="images/download-button.png" alt="Download" />
               </a>
@@ -231,7 +233,7 @@ const handlePlayPause = async () => {
         </div>
       </div>
       <div className="beat-info">
-        <p>BPM: {beat.bpm}, Key: {beat.key}, Date: {formatDate(beat.date)}</p>
+        <p>BPM: {beat.bpm} | Key: {beat.key} | Date: {formatDate(beat.date)}</p>
         <div>
           <img src="images/tag-icon.png" alt="BPM" />
           {beat.bpm}bpm&nbsp;

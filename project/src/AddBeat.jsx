@@ -17,7 +17,7 @@ function AddBeat() {
         if (type === "number") {
             parsedValue = parseInt(value, 10);
         } else if (type === "date") {
-            parsedValue = new Date(value).toISOString();
+            parsedValue = value;
         }
 
         setNewBeat(prev => ({ ...prev, [name]: parsedValue }));
@@ -30,13 +30,13 @@ function AddBeat() {
 
             // Only audio files allowed
             if (file.type !== 'audio/mpeg') {
-                window.alert("Only audio files are allowed.");
+                window.alert("Only audio files of mp3 type are allowed.");
                 e.target.value = "";
                 setAudioFile(null);
                 return;        
             }
                 
-            const maxFileSize = 50 * 1024; // 50KB in bytes
+            const maxFileSize = 50 * 1024 * 1024; // 50MB in bytes
             if (file.size > maxFileSize) {
                 window.alert("File size must be less than or equal to 25KB.");
                 e.target.value = "";
@@ -48,10 +48,15 @@ function AddBeat() {
         }
     };
 
-    const uploadAudioFile = async (file) => {
-        const filePath = `${file.name}`
+    const sanitizeFileName = (name) => {
+        return name
+        .replace(/[^a-zA-Z0-9_\-\.]/g, '_') // Replace disallowed chars with underscore
+    }
 
-        const {error} = await supabase.storage.from('audio').upload(filePath, file, {upsert: true});
+    const uploadAudioFile = async (file) => {
+        const filePath = `${sanitizeFileName(file.name)}`
+
+        const {error} = await supabase.storage.from('audio').upload(filePath, file);
         if (error) {
             console.log("Error uploading audio:", error.message);
             return;
@@ -65,10 +70,16 @@ function AddBeat() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let audioUrl = null;
+        if (!audioFile) {
+            window.alert("Please select a valid audio file before submitting.");
+            return;
+        }
 
-        if (audioFile) {
-        audioUrl = await uploadAudioFile(audioFile);
+        const audioUrl = await uploadAudioFile(audioFile);
+        
+        if (!audioUrl) {
+            window.alert("Audio upload failed. Please try again.");
+            return;
         }
 
         const beatToInsert = {
@@ -108,7 +119,7 @@ function AddBeat() {
             <div className="addbeat">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Name < length 30" maxLength={30} value={newBeat.name} onChange={handleChange}/>
+                    <input type="text" id="name" name="name" placeholder="Name < 20 characters" maxLength={20} value={newBeat.name} onChange={handleChange}/>
                     <label htmlFor="audio">Audio:</label>
                     <input type="file" id="audio" name="audio" onChange={handleAudioChange}/>
                     <label htmlFor="bpm">BPM:</label>
