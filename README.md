@@ -30,6 +30,7 @@ Through this project I learned more about building react applications (this time
 - Be able to search for specific beats
 - Allow users to remove beats they have added
 - Allow users to edit beats they have created
+- Add multiple pages so that all beats don't get stacked on a single page (causing a lot of scrolling)
 
 ## Acknowledgements
 
