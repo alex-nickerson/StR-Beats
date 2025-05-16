@@ -2,9 +2,6 @@
 
 A React + Vite App to display my music: beats!
 
-
-
-
 ## Features
 
 - Display beats fully using jsx
@@ -17,16 +14,22 @@ A React + Vite App to display my music: beats!
 - User authentication via login page; handled by Supabase authentication
 - Beats can only be added by authenticated users, and are updated to the database when added
 
-
 ## Lessons Learned
 
 Through this project I learned more about building react applications (this time using Vite + React), and how to connect an app to a database (using Supabase). I faced many challenges like how to upload files to the database, how to authenticate users, and even how to simply connect to the database in the beginning. I have learned valuable skills in Frontend + Backend integration, such as uploading data to a backend database (In this case, an SQL database), and retreiving said data to display it and interact with it (in the form of beats).
-
 
 ## Screenshots
 
 ![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
+## Future Updates
+
+- Allow users to signup so anyone can upload music
+- Allow users to sign out
+- Add "profiles" for users that will display their provided information and the music they have uploaded
+- Be able to search for specific beats
+- Allow users to remove beats they have added
+- Allow users to edit beats they have created
 
 ## Acknowledgements
 
