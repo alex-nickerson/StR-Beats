@@ -1,7 +1,7 @@
-// Waveform.jsx
 import React, { useEffect, useRef } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 
+// Draws a waveform from an audio file
 const Waveform = ({ audioUrl, audioRef }) => {
   const waveformRef = useRef(null);
   const waveSurferRef = useRef(null);

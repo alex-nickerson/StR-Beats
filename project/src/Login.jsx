@@ -9,6 +9,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //Authenticates the user signing in
     const { error: signInError } = await supabase.auth.signInWithPassword({
       email,
       password,
