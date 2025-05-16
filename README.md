@@ -1,6 +1,6 @@
 # StR Beats
 
-A React + Vite App to display my music: beats!
+A React + Vite App to display my music/beats!
 
 ## Features
 
@@ -20,7 +20,7 @@ Through this project I learned more about building react applications (this time
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![image](https://github.com/user-attachments/assets/c8b5e92f-2031-4eeb-a748-2c45e94230b5)
 
 ## Future Updates
 
