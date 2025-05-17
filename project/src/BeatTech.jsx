@@ -188,14 +188,14 @@ const handlePlayPause = async () => {
           </div>
           <div className="bottom">
             <div className="filler"></div>
-            <div>
+            <div className="controls">
               <div className="rewind">
                 <button onClick={handleRewind} className="rewind-button">
                   <p>⏪︎</p>
                 </button>
               </div>
-              <div>
-                <button onClick={handlePlayPause} className="play-button">
+              <div className="play-button">
+                <button onClick={handlePlayPause}>
                   <img
                     ref={playIconRef}
                     className="play-icon"

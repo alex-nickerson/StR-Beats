@@ -204,9 +204,6 @@ nav div{
     margin: auto;
 }
 
-.top{
-}
-
 .top .download-div{
     display: flex;
     justify-content: end;
@@ -225,8 +222,13 @@ nav div{
     background-color: #4e4e4e;
 }
 
+.bottom{
+    border: 2px solid blue;
+}
+
 .bottom .filler{
     width: 400px;
+    border: 2px solid green;
 }
 
 .bottom div{
@@ -234,8 +236,9 @@ nav div{
     padding: 5px;
 }
 
-.bottom .rewind{
+.bottom .rewind, .bottom .fastforward{
     width: 50%;
+    text-decoration: none;
 }
 
 .bottom .rewind-button{
@@ -247,9 +250,6 @@ nav div{
     margin: auto;
 }
 
-.bottom .fastforward{
-    width: 50%;
-}
 
 .bottom .fastforward-button{
     font-size: 50px;

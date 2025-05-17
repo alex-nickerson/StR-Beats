@@ -35,10 +35,18 @@
 
     .top h1{
         font-size: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .bottom .play-button{
-        width: 15vw;
+        width: 100px;
+    }
+
+    .bottom .rewind, .bottom .fastforward{
+        width: 50px;
+        text-decoration: none;
     }
 
     .bottom .volume-slider{
