@@ -20,6 +20,7 @@ const formatDate = (date) => {
 const BeatList = () => {
 
   const [beats, setBeats] = useState([])
+  const [sortOrder, setSortOrder] = useState('date-desc');
 
   const fetchBeats = async () => {
     const {error, data} = await supabase.from("Beats").select("*");
@@ -28,39 +29,35 @@ const BeatList = () => {
               return;
           }
       console.log("Fetched beats:", data);
-    setBeats(data)
+    const sortedData = sortBeats(data, sortOrder);
+    setBeats(sortedData);
   }
 
   useEffect(() => {
     fetchBeats()
   }, [])
 
-  // Default sort by date descending
-  const [sortOrder, setSortOrder] = useState('date-desc');
-
   useEffect(() => {
-    sortBeats(sortOrder);
+    setBeats(sortBeats(beats, sortOrder));
   }, [sortOrder]);
 
-  const sortBeats = (order) => {
-    const sortedBeats = [...beats];
+  const sortBeats = (unsortedBeats, order) => {
+    const sorted = [...unsortedBeats];
     switch (order) {
       case 'date-asc':
-        sortedBeats.sort((a, b) => new Date(a.date) - new Date(b.date));
+        sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
         break;
       case 'date-desc':
-        sortedBeats.sort((a, b) => new Date(b.date) - new Date(a.date));
+        sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
         break;
       case 'bpm-asc':
-        sortedBeats.sort((a, b) => a.bpm - b.bpm);
+        sorted.sort((a, b) => a.bpm - b.bpm);
         break;
       case 'bpm-desc':
-        sortedBeats.sort((a, b) => b.bpm - a.bpm);
-        break;
-      default:
+        sorted.sort((a, b) => b.bpm - a.bpm);
         break;
     }
-    setBeats(sortedBeats);
+    return sorted;
   };
 
   return (
