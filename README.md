@@ -2,6 +2,8 @@
 
 A React + Vite App to display my music/beats!
 
+LIVE: https://str-beats.vercel.app/
+
 ## Features
 
 - Display beats fully using jsx
