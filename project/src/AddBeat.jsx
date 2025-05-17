@@ -28,8 +28,9 @@ function AddBeat() {
         if (e.target.files && e.target.files.length>0) {
             const file = e.target.files[0];
 
+            const allowedTypes = ['audio/mpeg', 'audio/wav'];
             // Only audio files allowed
-            if (file.type !== 'audio/mpeg') {
+             if (!allowedTypes.includes(file.type)) {
                 window.alert("Only audio files of mp3 type are allowed.");
                 e.target.value = "";
                 setAudioFile(null);
