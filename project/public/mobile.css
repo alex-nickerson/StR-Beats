@@ -35,9 +35,6 @@
 
     .top h1{
         font-size: 30px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .bottom .play-button{
