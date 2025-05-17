@@ -191,7 +191,7 @@ const handlePlayPause = async () => {
             <div className="controls">
               <div className="rewind">
                 <button onClick={handleRewind} className="rewind-button">
-                  <p>⏪︎</p>
+                  ⏪︎
                 </button>
               </div>
               <div className="play-button">
@@ -206,7 +206,7 @@ const handlePlayPause = async () => {
               </div>
               <div className="fastforward">
                 <button onClick={handleFastForward} className="fastforward-button">
-                  <p>⏩︎</p>
+                  ⏩︎
                 </button>
               </div>
             </div>

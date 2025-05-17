@@ -239,23 +239,11 @@ nav div{
     text-decoration: none;
 }
 
-.bottom .rewind-button{
+.bottom .rewind-button, .bottom .fastforward-button{
+    display: flex;
     font-size: 50px;
-}
-
-.bottom .rewind-button p{
-    transform: translateY(-15px);
-    margin: auto;
-}
-
-
-.bottom .fastforward-button{
-    font-size: 50px;
-}
-
-.bottom .fastforward-button p{
-    transform: translateY(-15px);
-    margin: auto;
+    align-items: center;
+    line-height: 0;
 }
 
 .bottom button{

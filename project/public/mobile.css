@@ -26,11 +26,11 @@
     }
 
     .beat{
-        width: 80vw;
+        width: 90vw;
     }
 
     .beat-info{
-        width: 80vw;
+        width: 90vw;
     }
 
     .top h1{
@@ -44,6 +44,7 @@
     .bottom .rewind, .bottom .fastforward{
         width: 50px;
         text-decoration: none;
+        color: black;
     }
 
     .bottom .volume-slider{
