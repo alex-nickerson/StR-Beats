@@ -194,14 +194,9 @@ const handlePlayPause = async () => {
                   <span>⏪︎</span>
                 </button>
               </div>
-              <div className="play-button">
-                <button onClick={handlePlayPause}>
-                  <img
-                    ref={playIconRef}
-                    className="play-icon"
-                    src={playing ? "images/pause-button.png" : "images/play-button.png"}
-                    alt="Play/Pause"
-                  />
+              <div className="play">
+                <button onClick={handlePlayPause} className="play-button">
+                  <span>{playing ? '❚❚' : '▶'}</span>
                 </button>
               </div>
               <div className="fastforward">

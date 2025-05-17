@@ -238,25 +238,22 @@ nav div{
     padding: 5px;
 }
 
-.bottom .rewind, .bottom .fastforward{
-    all: unset;
-    width: 50%;
-    text-decoration: none;
-    line-height: 1;
-}
-
 .bottom .rewind-button, .bottom .fastforward-button, .bottom .play-button{
-    all: unset;
     display: flex;
-    font-size: 50px;
+    font-size: 45px;
     align-items: center;
+    justify-content: center;
     line-height: 1;
     text-decoration: none;
     color: black;
 }
 
+.bottom .play-button{
+    font-size: 40px;
+}
+
 .bottom button{
-    width: 100%;
+    width: 200%;
     height: 100%;
     border: 2px solid rgb(150, 150, 150);
     border-radius: 12px;
