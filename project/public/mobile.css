@@ -40,8 +40,6 @@
 
     .bottom .rewind, .bottom .fastforward{
         width: 50px;
-        text-decoration: none;
-        color: black;
     }
 
     .bottom .volume-slider{

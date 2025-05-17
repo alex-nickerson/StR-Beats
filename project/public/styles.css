@@ -4,6 +4,10 @@ html, body {
     padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container .login, .container .addbeat{
     border: 2px solid #1c1c1c;
     height: 300px;
@@ -244,6 +248,8 @@ nav div{
     font-size: 50px;
     align-items: center;
     line-height: 0;
+    text-decoration: none;
+    color: black;
 }
 
 .bottom button{
