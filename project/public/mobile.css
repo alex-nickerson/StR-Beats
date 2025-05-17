@@ -34,14 +34,6 @@
         font-size: 30px;
     }
 
-    .bottom .play-button{
-        width: 80px;
-    }
-
-    .bottom .rewind, .bottom .fastforward{
-        width: 50px;
-    }
-
     .bottom .volume-slider{
         display: none;
     }
