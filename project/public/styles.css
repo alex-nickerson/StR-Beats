@@ -239,26 +239,24 @@ nav div{
 }
 
 .bottom .rewind-button, .bottom .fastforward-button, .bottom .play-button{
+    all: unset;
     display: flex;
     font-size: 45px;
     align-items: center;
     justify-content: center;
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 12px;
     line-height: 1;
     text-decoration: none;
     color: black;
+    width: 200%;
+    height: 100%;
+    background-color: #302f2f;
+    cursor: pointer;
 }
 
 .bottom .play-button{
     font-size: 40px;
-}
-
-.bottom button{
-    width: 200%;
-    height: 100%;
-    border: 2px solid rgb(150, 150, 150);
-    border-radius: 12px;
-    background-color: #302f2f;
-    cursor: pointer;
 }
 
 .bottom button:hover{
