@@ -1,4 +1,4 @@
-# StR Beats [Version 1.0.1]
+# StR Beats [Version 1.1.0]
 
 A React + Vite App to display my music/beats!
 
