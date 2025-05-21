@@ -21,6 +21,7 @@ const BeatList = () => {
 
   const [beats, setBeats] = useState([])
   const [sortOrder, setSortOrder] = useState('date-desc');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchBeats = async () => {
     const {error, data} = await supabase.from("Beats").select("*");
@@ -40,6 +41,16 @@ const BeatList = () => {
   useEffect(() => {
     setBeats(sortBeats(beats, sortOrder));
   }, [sortOrder]);
+
+  const filteredBeats = beats.filter((beat) => {
+    const query = searchQuery.toLowerCase();
+    return (
+        beat.name.toLowerCase().includes(query) ||
+        beat.key.toLowerCase().includes(query) ||
+        String(beat.bpm).includes(query) ||
+        formatDate(beat.date).toLowerCase().includes(query)
+    );
+  });
 
   const sortBeats = (unsortedBeats, order) => {
     const sorted = [...unsortedBeats];
@@ -74,8 +85,18 @@ const BeatList = () => {
       </div>
       </div>
 
+      <div className="search-container">
+      <label htmlFor="">Search:</label>
+      <input
+        type="text"
+        placeholder="Search beats..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      </div>
+
       <div id="hero">
-        {beats.map((beat, index) => (
+        {filteredBeats.map((beat, index) => (
           <BeatCard key={index} beat={beat} />
         ))}
       </div>
@@ -91,6 +112,7 @@ const BeatCard = ({ beat }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
+  
 
 useEffect(() => {
   const audio = audioRef.current;

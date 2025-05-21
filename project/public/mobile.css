@@ -22,7 +22,11 @@
     }
 
     .sort-container{
-        transform: translateY(-140px);
+        transform: translateY(-125px);
+    }
+
+    .search-container{
+        display: none;
     }
 
     .beat, .beat-info{

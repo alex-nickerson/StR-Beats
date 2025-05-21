@@ -6,7 +6,7 @@ LIVE: https://str-beats.vercel.app/
 
 ## Latest Update
 
-Updated the styling of playback controls to function on all browsers.
+Added a search bar (only desktop view for now)!
 
 ## Features
 
@@ -36,7 +36,7 @@ Through this project I learned more about building react applications (this time
 - Allow users to signup so anyone can upload music
 - Allow users to sign out
 - Add "profiles" for users that will display their provided information and the music they have uploaded
-- Be able to search for specific beats
+- ~~Be able to search for specific beats~~
 - Allow users to remove beats they have added
 - Allow users to edit beats they have created
 - Add multiple pages so that all beats don't get stacked on a single page (causing a lot of scrolling)
