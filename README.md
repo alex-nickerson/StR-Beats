@@ -1,4 +1,4 @@
-# StR Beats [Version 1.1.0]
+# StR Beats [Version 1.2.0]
 
 A React + Vite App to display my music/beats!
 
@@ -6,7 +6,7 @@ LIVE: https://str-beats.vercel.app/
 
 ## Latest Update
 
-Added a search bar (only desktop view for now)!
+Audio files are now stored in Cloudflare R2! Uploads and requests are handled using a Wrangler worker!
 
 ## Features
 
@@ -17,6 +17,8 @@ Added a search bar (only desktop view for now)!
 - Custom audio controls to control the volume
 - Current time of playing beat provided and updates accordingly
 - Backend SQL integration via [Supabase](https://supabase.com/)
+- File storage via [Cloudflare R2](https://www.cloudflare.com/en-ca/developer-platform/products/r2/)
+- Audio file uploads and requests are handled via a [Wrangler](https://developers.cloudflare.com/workers/wrangler/) worker
 - User authentication via login page; handled by Supabase authentication
 - Beats can only be added by authenticated users, and are updated to the database when added
 

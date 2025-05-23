@@ -1,0 +1,8 @@
+name = "r2-audio-uploader"
+account_id = "59d5c63a729c749f0cb466f0d0390a20"
+compatibility_date = "2025-05-22"
+main = "src/index.js"
+
+[[r2_buckets]]
+binding = "AUDIO_BUCKET"
+bucket_name = "audio"

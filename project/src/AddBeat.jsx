@@ -54,18 +54,26 @@ function AddBeat() {
         .replace(/[^a-zA-Z0-9_\-\.]/g, '_') // Replace disallowed chars with underscore
     }
 
+    // Handle uploading audio files to Cloudflare R2 using workers
     const uploadAudioFile = async (file) => {
-        const filePath = `${sanitizeFileName(file.name)}`
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("filename", sanitizeFileName(file.name));
 
-        const {error} = await supabase.storage.from('audio').upload(filePath, file);
-        if (error) {
-            console.log("Error uploading audio:", error.message);
-            return;
+        const uploadUrl = `https://r2-audio-uploader.strbeats.workers.dev`;
+
+        const response = await fetch(uploadUrl, {
+            method: "POST",
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error("R2 Upload failed");
         }
 
-        const {data}  = await supabase.storage.from('audio').getPublicUrl(filePath);
-        return data.publicUrl;
-    }
+        const { url } = await response.json();
+        return url;
+    };
         
     // Handle submitting new beat
     const handleSubmit = async (e) => {
