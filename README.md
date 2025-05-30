@@ -31,6 +31,8 @@ Through this project I learned more about building react applications (this time
 ![image](https://github.com/alex-nickerson/StR-Beats/blob/71e669d0b52c7caa718efb05240aa3d4de724f24/project/public/images/app-screenshots/Homepage.png)
 ![image](https://github.com/alex-nickerson/StR-Beats/blob/71e669d0b52c7caa718efb05240aa3d4de724f24/project/public/images/app-screenshots/Login.png)
 ![image](https://github.com/alex-nickerson/StR-Beats/blob/71e669d0b52c7caa718efb05240aa3d4de724f24/project/public/images/app-screenshots/AddANewBeat.png)
+![image](https://github.com/alex-nickerson/StR-Beats/blob/main/project/public/images/app-screenshots/supabase-screenshot.png)
+![image](https://github.com/alex-nickerson/StR-Beats/blob/main/project/public/images/app-screenshots/r2-screenshot.png)
 
 ## Future Updates
 
