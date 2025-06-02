@@ -1,4 +1,4 @@
-# StR Beats [Version 1.2.0]
+# StR Beats [Version 1.3.0]
 
 A React + Vite App to display my music/beats!
 
@@ -6,7 +6,7 @@ LIVE: https://str-beats.vercel.app/
 
 ## Latest Update
 
-Audio files are now stored in Cloudflare R2! Uploads and requests are handled using a Wrangler worker!
+Added pages so all beats don't load on a single page!
 
 ## Features
 
@@ -43,7 +43,7 @@ Through this project I learned more about building react applications (this time
 - ~~Be able to search for specific beats~~
 - Allow users to remove beats they have added
 - Allow users to edit beats they have created
-- Add multiple pages so that all beats don't get stacked on a single page (causing a lot of scrolling)
+- ~~Add multiple pages so that all beats don't get stacked on a single page (causing a lot of scrolling)~~
 - Add sorting by key
 
 ## Acknowledgements

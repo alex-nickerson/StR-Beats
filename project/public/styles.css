@@ -88,7 +88,7 @@ nav img{
 }
 
 .logo img{
-    margin-left: 15px;
+    margin-left: 0px;
 }
 
 nav .admin{
@@ -172,7 +172,7 @@ nav div{
 .hero{
     height: 100vh;
     width: 100%;
-    margin: 100px auto 0;
+    margin: 100px auto 0 -5px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -323,6 +323,32 @@ nav div{
 .beat-info .tag-three{
     justify-content: flex-end;
     margin-right: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.page-btn {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #302f2f;
+  color: rgb(240, 240, 240);
+  border: 2px solid #888;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.page-btn:hover {
+  background-color: #4e4e4e;
+}
+
+.page-btn.active {
+  background-color: #1c1c1c;
+  border-color: #fff;
 }
 
 footer{

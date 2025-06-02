@@ -29,9 +29,9 @@
         display: none;
     }
 
-    .beat, .beat-info{
-        width: 90vw;
-        margin-right: 5vw;
+    .beat, .beat-info {
+    width: 100%;
+    max-width: 90vw;
     }
 
     .top h1{
@@ -87,6 +87,10 @@
     }
     .top h1{
         font-size: 26px;
+    }
+    .page-btn {
+    padding: 5px 10px;
+    font-size: 12px;
     }
 
 }

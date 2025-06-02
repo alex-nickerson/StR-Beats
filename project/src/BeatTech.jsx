@@ -22,6 +22,9 @@ const BeatList = () => {
   const [beats, setBeats] = useState([])
   const [sortOrder, setSortOrder] = useState('date-desc');
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const beatsPerPage = 5;
 
   const fetchBeats = async () => {
     const {error, data} = await supabase.from("Beats").select("*");
@@ -71,6 +74,13 @@ const BeatList = () => {
     return sorted;
   };
 
+  const indexOfLastBeat = currentPage * beatsPerPage;
+  const indexOfFirstBeat = indexOfLastBeat - beatsPerPage;
+  const currentBeats = filteredBeats.slice(indexOfFirstBeat, indexOfLastBeat);
+  const totalPages = Math.ceil(filteredBeats.length / beatsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <div className="sort-container">
@@ -96,8 +106,22 @@ const BeatList = () => {
       </div>
 
       <div id="hero">
-        {filteredBeats.map((beat, index) => (
-          <BeatCard key={index} beat={beat} />
+        {currentBeats.length > 0 ? (
+          currentBeats.map((beat, index) => <BeatCard key={index} beat={beat} />)
+        ) : (
+          <p>No beats found.</p>
+        )}
+      </div>
+
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i}
+            className={`page-btn ${currentPage === i + 1 ? 'active' : ''}`}
+            onClick={() => paginate(i + 1)}
+          >
+            {i + 1}
+          </button>
         ))}
       </div>
     </div>
@@ -107,12 +131,10 @@ const BeatList = () => {
 // The main function for each beat
 const BeatCard = ({ beat }) => {
   const audioRef = useRef(null);
-  const playIconRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
-  
 
 useEffect(() => {
   const audio = audioRef.current;
@@ -189,6 +211,7 @@ const handlePlayPause = async () => {
   const handleVolumeChange = (event) => {
     setVolume(event.target.value);
   };
+
   return (
     <div className="beat-container">
       <div className="beat">
