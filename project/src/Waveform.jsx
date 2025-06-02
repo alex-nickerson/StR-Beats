@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 
-// Draws a waveform from an audio file
 const Waveform = ({ audioUrl, audioRef }) => {
   const waveformRef = useRef(null);
   const waveSurferRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     if (!audioUrl || !waveformRef.current) return;
@@ -12,6 +12,8 @@ const Waveform = ({ audioUrl, audioRef }) => {
     if (waveSurferRef.current) {
       waveSurferRef.current.destroy();
     }
+
+    setIsLoading(true); // Start loading when a new audio is loaded
 
     waveSurferRef.current = WaveSurfer.create({
       container: waveformRef.current,
@@ -21,19 +23,31 @@ const Waveform = ({ audioUrl, audioRef }) => {
       responsive: true,
       barWidth: 2,
       normalize: true,
-      backend: 'MediaElement', //use external audio element
+      backend: 'MediaElement',
       mediaControls: false,
-      media: audioRef.current, //tie it to existing audio element
+      media: audioRef.current,
     });
 
-    waveSurferRef.current.load(audioUrl);
+    // When waveform is ready, stop showing loading
+    waveSurferRef.current.on('ready', () => {
+      setIsLoading(false);
+    });
 
     return () => {
       waveSurferRef.current?.destroy();
     };
   }, [audioUrl]);
 
-  return <div ref={waveformRef} />;
+  return (
+    <div>
+      {isLoading && (
+        <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', alignItems: 'center', color: '#888', position: 'absolute', left: 0,}}>
+          <span>Loading audio...</span>
+        </div>
+      )}
+      <div ref={waveformRef} />
+    </div>
+  );
 };
 
 export default Waveform;

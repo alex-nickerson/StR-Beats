@@ -201,6 +201,13 @@ nav div{
     margin: auto;
 }
 
+.wavecontainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .middle{
     position: relative;
     display: flex;
