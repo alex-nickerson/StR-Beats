@@ -23,6 +23,7 @@ const BeatList = () => {
   const [sortOrder, setSortOrder] = useState('date-desc');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [playingBeatId, setPlayingBeatId] = useState(null);
 
   const beatsPerPage = 5;
 
@@ -107,7 +108,8 @@ const BeatList = () => {
 
       <div id="hero">
         {currentBeats.length > 0 ? (
-          currentBeats.map((beat, index) => <BeatCard key={index} beat={beat} />)
+          currentBeats.map((beat, index) => <BeatCard key={index} beat={beat} isPlaying={playingBeatId === beat.id} 
+          onPlay={() => setPlayingBeatId(beat.id)} onPause={() => setPlayingBeatId(null)}/>)
         ) : (
           <p>No beats found.</p>
         )}
@@ -129,24 +131,27 @@ const BeatList = () => {
 };
 
 // The main function for each beat
-const BeatCard = ({ beat }) => {
+const BeatCard = ({ beat, isPlaying, onPlay, onPause }) => {
   const audioRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
+  const [waveSurfer, setWaveSurfer] = useState(null);
 
-useEffect(() => {
+  useEffect(() => {
   const audio = audioRef.current;
 
   const updateTime = () => {
     setCurrentTime(audio.currentTime);
     setDuration(audio.duration || 0);
+    if (waveSurfer && audio.duration) {
+      waveSurfer.seekTo(audio.currentTime / audio.duration);
+    }
   };
 
   // If the beat finishes playing, set its time to 0 and stop it
   const handleEnded = () => {
-    setPlaying(false);
+    onPause();
     setCurrentTime(0);
     audio.currentTime = 0;
   };
@@ -168,7 +173,7 @@ useEffect(() => {
     audio.removeEventListener('play', handlePlay);
     audio.removeEventListener('pause', handlePause);
   };
-}, [volume]);
+}, [volume, waveSurfer]);
 
 
 // Handles the function of playing and pausing a beat
@@ -180,21 +185,19 @@ const handlePlayPause = async () => {
     if (otherAudio !== currentAudio) {
       otherAudio.pause();
       otherAudio.currentTime = 0;
-      const otherPlayIcon = otherAudio.closest(".beat")?.querySelector(".play-icon");
-      if (otherPlayIcon) {
-        otherPlayIcon.src = "images/play-button.png";
-      }
     }
   });
 
   if (currentAudio.paused) {
     try {
       await currentAudio.play();
+      onPlay()
     } catch (error) {
       console.warn("Play failed:", error);
     }
   } else {
     currentAudio.pause();
+    onPause()
   }
   };
 
@@ -215,7 +218,7 @@ const handlePlayPause = async () => {
   return (
     <div className="beat-container">
       <div className="beat">
-        <audio ref={audioRef} src={beat.audio}></audio>
+        <audio ref={audioRef} src={beat.audio} key={beat.audio}></audio>
         <div className="container">
           <div className="top">
             <div></div>
@@ -228,7 +231,7 @@ const handlePlayPause = async () => {
           </div>
           <div className="middle">
             <div className="waveform">
-             <Waveform audioUrl={beat.audio} audioRef={audioRef} />
+             <Waveform key={beat.audio} audioUrl={beat.audio} audioRef={audioRef} />
             </div>
           </div>
           <div className="bottom">
@@ -241,7 +244,7 @@ const handlePlayPause = async () => {
               </div>
               <div className="play">
                 <button onClick={handlePlayPause} className="play-button">
-                  <span>{playing ? '❚❚' : '▶'}</span>
+                  <span>{isPlaying ? '❚❚' : '▶'}</span>
                 </button>
               </div>
               <div className="fastforward">

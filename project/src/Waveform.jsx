@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
 
-const Waveform = ({ audioUrl, audioRef }) => {
+const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
   const waveformRef = useRef(null);
   const waveSurferRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
@@ -28,15 +28,27 @@ const Waveform = ({ audioUrl, audioRef }) => {
       media: audioRef.current,
     });
 
+    waveSurferRef.current.load(audioRef.current);
+
+    if (setWaveform) {
+      setWaveform(waveSurferRef.current);
+    }
+
     // When waveform is ready, stop showing loading
     waveSurferRef.current.on('ready', () => {
       setIsLoading(false);
     });
 
+    waveSurferRef.current.on('seek', (progress) => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = progress * audioRef.current.duration;
+    }
+    });
+
     return () => {
       waveSurferRef.current?.destroy();
     };
-  }, [audioUrl]);
+  }, [audioUrl, audioRef, setWaveform]);
 
   return (
     <div>
