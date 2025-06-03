@@ -13,6 +13,10 @@ const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
       waveSurferRef.current.destroy();
     }
 
+    if (!audioRef.current) {
+      return;
+    }
+
     setIsLoading(true); // Start loading when a new audio is loaded
 
     const ws = WaveSurfer.create({
@@ -23,7 +27,6 @@ const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
       responsive: true,
       barWidth: 2,
       normalize: true,
-      backend: 'MediaElement',
       mediaControls: false,
       media: audioRef.current,
     });
