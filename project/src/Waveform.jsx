@@ -15,7 +15,7 @@ const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
 
     setIsLoading(true); // Start loading when a new audio is loaded
 
-    waveSurferRef.current = WaveSurfer.create({
+    const ws = WaveSurfer.create({
       container: waveformRef.current,
       waveColor: '#97A6BA',
       progressColor: '#3B82F6',
@@ -28,27 +28,29 @@ const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
       media: audioRef.current,
     });
 
-    waveSurferRef.current.load(audioRef.current);
+    waveSurferRef.current = ws
 
-    if (setWaveform) {
-      setWaveform(waveSurferRef.current);
-    }
+    ws.load(audioRef.current);
 
     // When waveform is ready, stop showing loading
-    waveSurferRef.current.on('ready', () => {
+    ws.on('ready', () => {
       setIsLoading(false);
     });
 
-    waveSurferRef.current.on('seek', (progress) => {
+    ws.on('seek', (progress) => {
     if (audioRef.current) {
       audioRef.current.currentTime = progress * audioRef.current.duration;
     }
     });
 
+    if (setWaveform) {
+      setWaveform(ws);
+    }
+
     return () => {
-      waveSurferRef.current?.destroy();
+      ws.destroy();
     };
-  }, [audioUrl, audioRef, setWaveform]);
+  }, [audioUrl]);
 
   return (
     <div>

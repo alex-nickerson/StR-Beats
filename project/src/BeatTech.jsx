@@ -218,7 +218,7 @@ const handlePlayPause = async () => {
   return (
     <div className="beat-container">
       <div className="beat">
-        <audio ref={audioRef} src={beat.audio} key={beat.audio}></audio>
+        <audio ref={audioRef} src={beat.audio} key={beat.audio} preload="auto"></audio>
         <div className="container">
           <div className="top">
             <div></div>
