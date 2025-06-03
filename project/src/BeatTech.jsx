@@ -156,8 +156,8 @@ const BeatCard = ({ beat, isPlaying, onPlay, onPause }) => {
     audio.currentTime = 0;
   };
 
-  const handlePlay = () => setPlaying(true);
-  const handlePause = () => setPlaying(false);
+  const handlePlay = () => onPlay();
+  const handlePause = () => onPause();
 
   audio.volume = volume;
   audio.addEventListener('timeupdate', updateTime);
@@ -173,7 +173,7 @@ const BeatCard = ({ beat, isPlaying, onPlay, onPause }) => {
     audio.removeEventListener('play', handlePlay);
     audio.removeEventListener('pause', handlePause);
   };
-}, [volume, waveSurfer]);
+}, [volume, audioRef.current, waveSurfer]);
 
 
 // Handles the function of playing and pausing a beat
