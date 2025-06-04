@@ -132,93 +132,87 @@ const BeatList = () => {
 
 // The main function for each beat
 const BeatCard = ({ beat, isPlaying, onPlay, onPause }) => {
-  const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
-  const [waveSurfer, setWaveSurfer] = useState(null);
+  const waveformRef = useRef();
 
-  useEffect(() => {
-  const audio = audioRef.current;
+useEffect(() => {
+  const ws = waveformRef.current?.getWaveSurfer?.();
+  if (!ws) return;
 
   const updateTime = () => {
-    setCurrentTime(audio.currentTime);
-    setDuration(audio.duration || 0);
-    if (waveSurfer && audio.duration) {
-      waveSurfer.seekTo(audio.currentTime / audio.duration);
-    }
+    setCurrentTime(ws.getCurrentTime());
+    setDuration(ws.getDuration());
   };
 
-  // If the beat finishes playing, set its time to 0 and stop it
-  const handleEnded = () => {
-    onPause();
+  const handleFinish = () => {
     setCurrentTime(0);
-    audio.currentTime = 0;
+    onPause();
+    ws.stop() // Notify parent that it's no longer playing
   };
 
-  const handlePlay = () => onPlay();
-  const handlePause = () => onPause();
+  ws.on('audioprocess', updateTime);
+  ws.on('seek', updateTime);
+  ws.on('ready', updateTime);
+  ws.on('finish', handleFinish);
 
-  audio.volume = volume;
-  audio.addEventListener('timeupdate', updateTime);
-  audio.addEventListener('loadedmetadata', updateTime);
-  audio.addEventListener('ended', handleEnded);
-  audio.addEventListener('play', handlePlay);
-  audio.addEventListener('pause', handlePause);
+  ws.setVolume(volume);
 
   return () => {
-    audio.removeEventListener('timeupdate', updateTime);
-    audio.removeEventListener('loadedmetadata', updateTime);
-    audio.removeEventListener('ended', handleEnded);
-    audio.removeEventListener('play', handlePlay);
-    audio.removeEventListener('pause', handlePause);
+    ws.un('audioprocess', updateTime);
+    ws.un('seek', updateTime);
+    ws.un('ready', updateTime);
+    ws.un('finish', handleFinish);
   };
-}, [volume, audioRef.current, waveSurfer]);
-
+}, [volume, onPause]);
 
 // Handles the function of playing and pausing a beat
-const handlePlayPause = async () => {
-  const currentAudio = audioRef.current;
+const handlePlayPause = () => {
+  const ws = waveformRef.current?.getWaveSurfer?.();
+  if (!ws) return;
 
-  // Stop all other audio elements if an audio is playing
-  document.querySelectorAll("audio").forEach((otherAudio) => {
-    if (otherAudio !== currentAudio) {
-      otherAudio.pause();
-      otherAudio.currentTime = 0;
-    }
-  });
-
-  if (currentAudio.paused) {
-    try {
-      await currentAudio.play();
-      onPlay()
-    } catch (error) {
-      console.warn("Play failed:", error);
-    }
+  if (!isPlaying) {
+    onPlay(); // This tells BeatList to update `playingBeatId`
+    ws.play();
   } else {
-    currentAudio.pause();
-    onPause()
+    onPause();
+    ws.pause();
   }
-  };
-
+};
   const handleRewind = () => {
-    const audio = audioRef.current;
-    audio.currentTime = Math.max(0, audio.currentTime - 5);
+    const ws = waveformRef.current?.getWaveSurfer?.();
+    if (!ws) return;
+    const newTime = Math.max(0, ws.getCurrentTime() - 5);
+    ws.seekTo(newTime / ws.getDuration());
   };
 
   const handleFastForward = () => {
-    const audio = audioRef.current;
-    audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+    const ws = waveformRef.current?.getWaveSurfer?.();
+    if (!ws) return;
+    const newTime = Math.min(ws.getDuration(), ws.getCurrentTime() + 5);
+    ws.seekTo(newTime / ws.getDuration());
   };
 
-  const handleVolumeChange = (event) => {
-    setVolume(event.target.value);
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    const ws = waveformRef.current?.getWaveSurfer?.();
+    if (ws) ws.setVolume(newVolume);
   };
+
+  useEffect(() => {
+    if (!isPlaying) {
+      const ws = waveformRef.current?.getWaveSurfer?.();
+      if (ws && ws.isPlaying()) {
+        ws.pause();
+      }
+    }
+  }, [isPlaying]);
 
   return (
     <div className="beat-container">
       <div className="beat">
-        <audio ref={audioRef} src={beat.audio} key={beat.audio} preload="auto"></audio>
         <div className="container">
           <div className="top">
             <div></div>
@@ -231,7 +225,7 @@ const handlePlayPause = async () => {
           </div>
           <div className="middle">
             <div className="waveform">
-             <Waveform key={beat.audio} audioUrl={beat.audio} audioRef={audioRef} />
+             <Waveform ref={waveformRef} audioUrl={beat.audio} />
             </div>
           </div>
           <div className="bottom">

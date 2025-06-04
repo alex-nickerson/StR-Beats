@@ -1,4 +1,4 @@
-# StR Beats [Version 1.3.1]
+# StR Beats [Version 1.4.0]
 
 A React + Vite App to display my music/beats!
 
@@ -6,7 +6,7 @@ LIVE: https://str-beats.vercel.app/
 
 ## Latest Update
 
-"Loading audio" text is displayed while loading audio!
+Audio is now handled entirely through the Waveform component, meaning loading is faster and code is more modular! 
 
 ## Features
 
