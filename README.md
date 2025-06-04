@@ -6,7 +6,7 @@ LIVE: https://str-beats.vercel.app/
 
 ## Latest Update
 
-Audio is now handled entirely through the Waveform component, meaning loading is faster and code is more modular! 
+Audio is now handled entirely through the Waveform.jsx component, meaning loading is faster and code is more modular! 
 
 ## Features
 
