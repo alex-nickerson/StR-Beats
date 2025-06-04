@@ -40,12 +40,6 @@ const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
       setIsLoading(false);
     });
 
-    ws.on('seek', (progress) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = progress * audioRef.current.duration;
-    }
-    });
-
     if (setWaveform) {
       setWaveform(ws);
     }
@@ -53,7 +47,7 @@ const Waveform = ({ audioUrl, audioRef, setWaveform }) => {
     return () => {
       ws.destroy();
     };
-  }, [audioUrl]);
+  }, [audioRef.current]);
 
   return (
     <div>
