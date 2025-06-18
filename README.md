@@ -33,6 +33,10 @@ Through this project I learned more about building react applications (this time
 ![image](https://github.com/alex-nickerson/StR-Beats/blob/main/project/public/images/app-screenshots/supabase-screenshot.png)
 ![image](https://github.com/alex-nickerson/StR-Beats/blob/main/project/public/images/app-screenshots/r2-screenshot.png)
 
+## User Interface
+
+Early design mockup: [Figma project](https://www.figma.com/design/Ggt4RVbYw0KfmBopPjbEje/strbeats?node-id=0-1&t=U2TTDFJUMoGIYO0M-1)
+
 ## Future Updates
 
 - ~~Be able to search for specific beats~~
