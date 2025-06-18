@@ -177,7 +177,13 @@ nav div{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
     flex: 1;
+}
+
+.hero h3{
+    color: white;
+    font-size: xx-large;
 }
 
 .beat{

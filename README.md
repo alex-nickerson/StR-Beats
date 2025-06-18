@@ -1,4 +1,4 @@
-# StR Beats [Version 1.4.0]
+# StR Beats [Version 1.4.1]
 
 A React + Vite App to display my music/beats!
 
@@ -10,17 +10,16 @@ Audio is now handled entirely through the Waveform.jsx component, meaning loadin
 
 ## Features
 
-- Display beats fully using jsx
+- Display beats using Javascript + React
 - Download beats via download button
 - Automatically draws waveform based on the audio file provided
 - Playing and seeking through beats via custom controls and by clicking on the waveform
-- Custom audio controls to control the volume
-- Current time of playing beat provided and updates accordingly
+- Playback time of beat provided and updates accordingly
 - Backend SQL integration via [Supabase](https://supabase.com/)
 - File storage via [Cloudflare R2](https://www.cloudflare.com/en-ca/developer-platform/products/r2/)
 - Audio file uploads and requests are handled via a [Wrangler](https://developers.cloudflare.com/workers/wrangler/) worker
 - User authentication via login page; handled by Supabase authentication
-- Beats can only be added by authenticated users, and are updated to the database when added
+- Beats can only be added by authenticated users (me), and are updated to the database when added
 
 ## Lessons Learned
 
@@ -36,15 +35,16 @@ Through this project I learned more about building react applications (this time
 
 ## Future Updates
 
-- Allow more characters in the name of a beat by making the UI more responsive to scaling
-- Allow users to signup so anyone can upload music
-- Allow users to sign out
-- Add "profiles" for users that will display their provided information and the music they have uploaded
 - ~~Be able to search for specific beats~~
-- Allow users to remove beats they have added
-- Allow users to edit beats they have created
 - ~~Add multiple pages so that all beats don't get stacked on a single page (causing a lot of scrolling)~~
 - Add sorting by key
+
+#### If users can sign up:
+
+- Allow users to sign out
+- Add "profiles" for users that will display their provided information and the music they have uploaded
+- Allow users to remove beats they have added
+- Allow users to edit beats they have created
 
 ## Acknowledgements
 

@@ -29,6 +29,10 @@
         display: none;
     }
 
+    .search-container input{
+        padding: 2px;
+    }
+
     .beat, .beat-info {
     width: 100%;
     max-width: 90vw;

@@ -111,7 +111,7 @@ const BeatList = () => {
           currentBeats.map((beat, index) => <BeatCard key={index} beat={beat} isPlaying={playingBeatId === beat.id} 
           onPlay={() => setPlayingBeatId(beat.id)} onPause={() => setPlayingBeatId(null)}/>)
         ) : (
-          <p>No beats found.</p>
+          <h3>No beats found.</h3>
         )}
       </div>
 
