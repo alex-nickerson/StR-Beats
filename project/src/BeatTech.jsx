@@ -82,6 +82,40 @@ const BeatList = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // ====== NEW PAGINATION WINDOW LOGIC (1-5 then 2-6, etc.) ======
+  const windowSize = 5;
+
+  const getPageWindow = (current, total, size) => {
+    if (total <= size) {
+      return Array.from({ length: total }, (_, i) => i + 1);
+    }
+
+    let start = current - Math.floor(size / 2);
+    let end = start + size - 1;
+
+    if (start < 1) {
+      start = 1;
+      end = size;
+    }
+    if (end > total) {
+      end = total;
+      start = total - size + 1;
+    }
+
+    return Array.from({ length: size }, (_, i) => start + i);
+  };
+
+  const visiblePages = getPageWindow(currentPage, totalPages, windowSize);
+
+  const goPrev = () => setCurrentPage((p) => Math.max(1, p - 1));
+  const goNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
+
+  // Clamp current page when filtering/searching reduces total pages
+  useEffect(() => {
+    setCurrentPage((p) => Math.min(p, totalPages || 1));
+  }, [totalPages]);
+  // =============================================================
+
   return (
     <div>
       <div className="sort-container">
@@ -115,17 +149,37 @@ const BeatList = () => {
         )}
       </div>
 
+      {/* ====== REPLACED PAGINATION UI ====== */}
       <div className="pagination">
-        {Array.from({ length: totalPages }, (_, i) => (
+        <button
+          className="page-btn"
+          onClick={goPrev}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+        >
+          ←
+        </button>
+
+        {visiblePages.map((pageNum) => (
           <button
-            key={i}
-            className={`page-btn ${currentPage === i + 1 ? 'active' : ''}`}
-            onClick={() => paginate(i + 1)}
+            key={pageNum}
+            className={`page-btn ${currentPage === pageNum ? 'active' : ''}`}
+            onClick={() => paginate(pageNum)}
           >
-            {i + 1}
+            {pageNum}
           </button>
         ))}
+
+        <button
+          className="page-btn"
+          onClick={goNext}
+          disabled={currentPage === totalPages || totalPages === 0}
+          aria-label="Next page"
+        >
+          →
+        </button>
       </div>
+      {/* ================================ */}
     </div>
   );
 };
